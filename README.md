@@ -23,8 +23,11 @@ Once this is changed the script can be run by pressing SOURCE in the top right o
 ### Input
 
 3 input files are used for this code, each with a example file provided.
+
 -data_test.csv
+
 -date.csv
+
 -time.csv
 
 DATA_TEST, is the actual datasheet, the first column is the sample number (1,2,...,n), the second column specifies the 'before condition (1)' and the 'after condition (2)' and the remaining columns are for the exit angles(0,355).
@@ -36,7 +39,9 @@ TIME, is the time of day, needed when correcting for azimuth changes through a d
 ### output
 
 2 types of output files will be created in the INPUT folder.
+
 -azi_dataframe.csv
+
 -plots, (ie. sample_1.csv, sample_2.csv, sample_3.csv)
 
 AZI_DATAFRAME, has 7 columns. The first column has the sample names, the second column has the mean vector length, the third has the difference in mean bearing, the fourth has the standard deviation value, the fifth has the angular deviation value, the sixth has the rayleigh test and the seventh has the sample size.
