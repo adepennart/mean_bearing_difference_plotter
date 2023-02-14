@@ -1,7 +1,7 @@
 rm(list=ls())
 #set to your own working directory
 #getwd() is a good place to start to find out which directory you are currently in
-setwd("/Users/lamarcki/Documents/AP_masters/behaviour/excel_datasheet/") 
+setwd("/Users/lamarcki/Documents/AP_masters/behaviour/general_r_scripts/input/") 
 install.packages(c("solarPos", "circular","ggplot2", "plotrix"))
 
 #import libraries 
@@ -11,9 +11,9 @@ library(ggplot2)
 library(ggpmisc)
 
 #import and explore 
-raw_data <- read.csv("raw_data.csv") 
-timesheet <-  read.csv("azimuth_calc.csv") 
-date <- read.csv("date_nov.csv")
+raw_data <- read.csv("test_data.csv") 
+timesheet <-  read.csv("time.csv") 
+date <- read.csv("date.csv")
 #str(raw_data)
 #str(timesheet)
 #str(date)
@@ -318,8 +318,8 @@ for (column in 3:length(raw_data)) {
 }
 
 #datatable
-time_vec <- c(0, 10, 30,60,120,180)
-azi_dataframe <- data.frame(row_name, c(time_vec,time_vec),rho_azi_vec, mean_azi_vec, sd_real_azi_vec, sd_azi_vec,ray_azi_vec, sample_azi_vec)
-reg_dataframe <- data.frame(row_name, c(time_vec,time_vec),rho_azi_vec, mean_azi_vec, sd_real_azi_vec, sd_azi_vec,ray_azi_vec, sample_azi_vec)
+time_vec <- c(0, 10, 30)
+azi_dataframe <- data.frame(row_name, c(time_vec),rho_azi_vec, mean_azi_vec, sd_real_azi_vec, sd_azi_vec,ray_azi_vec, sample_azi_vec)
+reg_dataframe <- data.frame(row_name, c(time_vec),rho_azi_vec, mean_azi_vec, sd_real_azi_vec, sd_azi_vec,ray_azi_vec, sample_azi_vec)
 write.csv(azi_dataframe, "azi_dataframe.csv", row.names=FALSE)
 #tablesgenerator.com for latex format
