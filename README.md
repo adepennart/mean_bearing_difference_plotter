@@ -42,7 +42,7 @@ TIME, is the time of day, needed when correcting for azimuth changes through a d
 
 -azi_dataframe.csv
 
--plots, (ie. sample_1.csv, sample_2.csv, sample_3.csv)
+-plots, (ie. condition_1.csv, condition_2.csv, condition_3.csv)
 
 AZI_DATAFRAME, has 7 columns. The first column has the sample names, the second column has the mean vector length, the third has the difference in mean bearing, the fourth has the standard deviation value, the fifth has the angular deviation value, the sixth has the rayleigh test and the seventh has the sample size.
 
