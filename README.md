@@ -38,7 +38,7 @@ TIME, is the time of day, needed when correcting for azimuth changes through a d
 
 ### output
 
-2 types of output files will be created in the INPUT folder.
+2 types of output files will be created in the INPUT_OUTPUT folder.
 
 -azi_dataframe.csv
 
