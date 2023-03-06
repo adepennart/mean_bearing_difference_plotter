@@ -1,8 +1,8 @@
 rm(list=ls())
 #set to your own working directory
 #getwd() is a good place to start to find out which directory you are currently in
-setwd("/This/is/your/file/path") 
-install.packages(c("solarPos", "circular","ggplot2", "ggpmisc"))
+setwd("/Users/lamarcki/Documents/AP_masters/behaviour/general_r_scripts/input_output/") 
+#install.packages(c("solarPos", "circular","ggplot2", "ggpmisc"))
 
 #import libraries 
 library(circular) 
@@ -70,50 +70,55 @@ sum_vec_azimuth <- function(angles=NA, a_my_col=NA, b_my_col=NA, a_my_row=NA, b_
   #print((timesheet[(b_my_row/10),b_my_col]))
   #time vector
   time_a=julianDay(2022,11,date[a_my_row/10,a_my_col], hour = as.numeric(substr(timesheet[a_my_row/10,a_my_col],1,2)), min = as.numeric(substr(timesheet[a_my_row/10,a_my_col],4,5)), sec = 0, tz= 2)
-  #sun position vector
-  sp_a=solarPosition(time_a,27.9192,-24.7114)
-  #repeated for angle after
-  time_b=julianDay(2022,11,date[b_my_row/10,b_my_col], hour = as.numeric(substr(timesheet[b_my_row/10,b_my_col],1,2)), min = as.numeric(substr(timesheet[b_my_row/10,b_my_col],4,5)), sec = 0, tz =2)
-  #repeated for angle after
-  sp_b=solarPosition(time_b,27.9192,-24.7114)
-  #print(angles[1])
-  #print(angles[2])
-  #print(angles[3])
-  #print(sp_a)
-  #print(sp_b)
-  #print((ang_dif_2))
-  angle1_2 <- angles[1]
-  sun_dif <- sp_b[2] - sp_a[2] 
-  angle2_2 <- angles[2] - sun_dif
-  ang_dif_2 <- (angle2_2-angle1_2)
-  #correction of angles to positive
-  if (is.na(ang_dif_2)) {
-  }
-  else  {
-    if (ang_dif_2 < 0) {
-      ang_dif_2 <- ang_dif_2 +360
+  if (!identical(time_a, numeric(0))) {
+    #sun position vector
+    sp_a=solarPosition(time_a,27.9192,-24.7114)
+    #repeated for angle after
+    time_b=julianDay(2022,11,date[b_my_row/10,b_my_col], hour = as.numeric(substr(timesheet[b_my_row/10,b_my_col],1,2)), min = as.numeric(substr(timesheet[b_my_row/10,b_my_col],4,5)), sec = 0, tz =2)
+    #repeated for angle after
+    sp_b=solarPosition(time_b,27.9192,-24.7114)
+    #print(angles[1])
+    #print(angles[2])
+    #print(angles[3])
+    #print(sp_a)
+    #print(sp_b)
+    #print((ang_dif_2))
+    angle1_2 <- angles[1]
+    sun_dif <- sp_b[2] - sp_a[2] 
+    angle2_2 <- angles[2] - sun_dif
+    ang_dif_2 <- (angle2_2-angle1_2)
+    #correction of angles to positive
+    if (is.na(ang_dif_2)) {
     }
-    if ((angle1_2) < 0) {
-      angle1_2 <- 360 + angle1_2
+    else  {
+      if (ang_dif_2 < 0) {
+        ang_dif_2 <- ang_dif_2 +360
+      }
+      if ((angle1_2) < 0) {
+        angle1_2 <- 360 + angle1_2
+      }
+      if ((angle2_2) < 0) {
+        angle2_2 <- 360 + angle2_2
+      }
     }
-    if ((angle2_2) < 0) {
-      angle2_2 <- 360 + angle2_2
+    ang_dif_2 <- (angle2_2-angle1_2)
+    if (is.na(ang_dif_2)) {
     }
-  }
-  ang_dif_2 <- (angle2_2-angle1_2)
-  if (is.na(ang_dif_2)) {
-  }
-  else  {
-    if (ang_dif_2 < 0) {
-      ang_dif_2 <- ang_dif_2 +360
+    else  {
+      if (ang_dif_2 < 0) {
+        ang_dif_2 <- ang_dif_2 +360
+      }
     }
+    #print((timesheet[a_my_row,a_my_col]))
+    #print(ind-1)
+    #print(sp_b[2])
+    # print(angle1_2)
+    #print(angle2_2)
+    #print((ang_dif_2))
   }
-  #print((timesheet[a_my_row,a_my_col]))
-  #print(ind-1)
-  #print(sp_b[2])
-  # print(angle1_2)
-  #print(angle2_2)
-  #print((ang_dif_2))
+  else {
+    ang_dif_2 = 0
+  }
   return(ang_dif_2)
 }
 
@@ -261,7 +266,7 @@ for (column in 3:length(raw_data)) {
   ang_dif <- (plus-minus)
   dat <- circleFun(diameter =2, start=plus, end=minus)
   
-  plot.circular(x = azimuth, stack = TRUE, bins =72, col = "black", bg="gold", pch = 21,cex = 3,sep = 0.035, start.sep = 0.05, axes = FALSE, ylim = c(-1,1.25))#, xlim = c(-1,1), ylim = c(-1,1.5))
+  plot.circular(x = azimuth, stack = TRUE, bins =72, col = "black", bg="gold", pch = 21,cex = 3,sep = 0.035, start.sep = 0.05, axes = FALSE, ylim = c(-1.25,1.25))#, xlim = c(-1,1), ylim = c(-1,1.5))
   #print(colnames(raw_data)[column], axes = FALSE)#,shrink = 0.7)#,xlim=100, ylim=100)
   #print(diff_vec)
   #print(diff_vec_2)
