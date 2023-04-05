@@ -1,8 +1,8 @@
 rm(list=ls())
 #set to your own working directory
 #getwd() is a good place to start to find out which directory you are currently in
-setwd("/Users/lamarcki/Documents/AP_masters/behaviour/general_r_scripts/input_output/") 
-#install.packages(c("solarPos", "circular","ggplot2", "ggpmisc"))
+setwd("/use/your/own/file/path") 
+install.packages(c("solarPos", "circular","ggplot2", "ggpmisc"))
 
 #import libraries 
 library(circular) 
