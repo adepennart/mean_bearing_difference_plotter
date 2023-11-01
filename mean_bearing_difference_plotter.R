@@ -14,7 +14,11 @@ library(ggpmisc)
 raw_data <- read.csv("test_data.csv") 
 timesheet <-  read.csv("time.csv") 
 date <- read.csv("date.csv")
-
+year=2022
+month=11
+x_coor=27.9192
+y_coor=-24.7114
+export=FALSE #if true exports figure does not show it
 #functions
 # ----------------------------------------------------------------------------------------
 #function for finding the mean angle difference (before and after treatment)
@@ -59,14 +63,14 @@ sum_vec <- function(a_sin_vec=NA, b_sin_vec=NA, a_cos_vec=NA, b_cos_vec=NA) {
 #mean angle difference 
 sum_vec_azimuth <- function(angles=NA, a_my_col=NA, b_my_col=NA, a_my_row=NA, b_my_row=NA, date=NA, timesheet=NA) {
   #time vector
-  time_a=julianDay(2022,11,date[a_my_row/10,a_my_col], hour = as.numeric(substr(timesheet[a_my_row/10,a_my_col],1,2)), min = as.numeric(substr(timesheet[a_my_row/10,a_my_col],4,5)), sec = 0, tz= 2)
+  time_a=julianDay(year,month,date[a_my_row/10,a_my_col], hour = as.numeric(substr(timesheet[a_my_row/10,a_my_col],1,2)), min = as.numeric(substr(timesheet[a_my_row/10,a_my_col],4,5)), sec = 0, tz= 2)
   if (!identical(time_a, numeric(0))) {
     #sun position vector
-    sp_a=solarPosition(time_a,27.9192,-24.7114)
+    sp_a=solarPosition(time_a,x_coor,y_coor)
     #repeated for angle after
     time_b=julianDay(2022,11,date[b_my_row/10,b_my_col], hour = as.numeric(substr(timesheet[b_my_row/10,b_my_col],1,2)), min = as.numeric(substr(timesheet[b_my_row/10,b_my_col],4,5)), sec = 0, tz =2)
     #repeated for angle after
-    sp_b=solarPosition(time_b,27.9192,-24.7114)
+    sp_b=solarPosition(time_b,x_coor,y_coor)
     angle1_2 <- angles[1]
     sun_dif <- sp_b[2] - sp_a[2] 
     angle2_2 <- angles[2] - sun_dif
@@ -182,7 +186,9 @@ for (column in 3:length(raw_data)) {
   b_cos_vec <- vector()
   #plotting section
   name=paste(as.character(colnames(raw_data)[column]),".pdf")
-  pdf(name) 
+  if ((export) == TRUE) {
+    pdf(name) 
+    }
   #circular variable
   azimuth <- circular(x=diff_vec_2, type = "angles", units = "degrees", zero= 1.57079633, rotation ="clock")#, modulo = "2pi")#, rotation = "counter")
   #plot
@@ -225,7 +231,9 @@ for (column in 3:length(raw_data)) {
   diff_vec <- vector()
   diff_vec_2 <- vector()
   #exporting
-  dev.off()
+  if ((export) == TRUE) {
+    dev.off()
+  }
 }
 
 #datatable
